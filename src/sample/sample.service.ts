@@ -1,31 +1,30 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
 import { CreateSampleInput } from './dto/create-sample.input';
 import { UpdateSampleInput } from './dto/update-sample.input';
-import { Sample } from './entities/sample.entity';
 
 @Injectable()
 export class SampleService {
+  constructor(private prisma: PrismaService) { }
+
   create(createSampleInput: CreateSampleInput) {
     return 'This action adds a new sample';
   }
 
   findAll() {
-    // Sample!!
-    const sample1 = new Sample();
-    sample1.id = 1;
-
-    const sample2 = new Sample();
-    sample2.id = 2;
-
-    return [sample1, sample2];
+    return this.prisma.sample.findMany({
+      orderBy: {
+        id: 'asc',
+      },
+    })
   }
 
   findOne(id: number) {
-    // Sample!!
-    const sample = new Sample();
-    sample.id = 10;
-
-    return sample;
+    return this.prisma.sample.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
   update(id: number, updateSampleInput: UpdateSampleInput) {

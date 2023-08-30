@@ -10,6 +10,7 @@ import { join } from 'path/posix';
             useFactory: async () => ({
                 plugins: [ApolloServerPluginLandingPageLocalDefault()],
                 playground: false,
+                debug: true,
                 typePaths: ['./src/**/*.graphql'],
                 definitions: {
                     path: join(process.cwd(), 'src/graphql/type/graphql.ts'),

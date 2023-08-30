@@ -1,13 +1,13 @@
 type Sample {
-  # Example field (placeholder)
-  # exampleField: Int
-  id: Int
+  id: Int!
+  title: String
+  content: String!
 }
 
 input CreateSampleInput {
-  # Example field (placeholder)
-  # exampleField: Int
-  id: Int
+  id: Int!
+  title: String
+  content: String!
 }
 
 input UpdateSampleInput {

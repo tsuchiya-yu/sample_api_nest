@@ -36,3 +36,4 @@ lerna-debug.log*
 
 # manual
 .env
+src/@generated/*

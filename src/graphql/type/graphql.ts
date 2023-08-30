@@ -9,7 +9,9 @@
 /* eslint-disable */
 
 export class CreateSampleInput {
-    id?: Nullable<number>;
+    id: number;
+    title?: Nullable<string>;
+    content: string;
 }
 
 export class UpdateSampleInput {
@@ -17,7 +19,9 @@ export class UpdateSampleInput {
 }
 
 export class Sample {
-    id?: Nullable<number>;
+    id: number;
+    title?: Nullable<string>;
+    content: string;
 }
 
 export abstract class IQuery {

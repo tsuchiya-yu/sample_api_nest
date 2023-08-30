@@ -4,4 +4,10 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 export class Sample {
     @Field(() => Int, { description: 'uniq key' })
     id: number;
+
+    @Field({ nullable: true })
+    title: string;
+
+    @Field()
+    content: string;
 }
