@@ -1,3 +1,7 @@
+## 環境構築
+① ブランチをpullしてdocker compose upすればOK。  
+② Firebaseの設定が必要。  
+
 ## コマンド
 
 ### DB接続
@@ -26,7 +30,7 @@ http://localhost:3000/graphql
 
 ## モデルの自動生成コマンド
 ① prisma/schema.prismaを編集(手動)  
-② 「npx prisma migrate dev --name ＜コメント＞」を実行
-③「npx prisma generate」を実行
-④「src/@generated」の下に自動生成ソースが配置されるので適所に配置
+② 「npx prisma migrate dev --name ＜コメント＞」を実行  
+③「npx prisma generate」を実行  
+④「src/@generated」の下に自動生成ソースが配置されるので適所に配置  
 
