@@ -11,16 +11,32 @@ mysql -h nest-db -u <ユーザ(環境変数)> -p<パスワード(環境変数)>
 use <データベース名>;
 ```
 
-### curlでの会員登録/ログイン確認
+### graphqlのクエリ(サンプル)
 ```sh
 # サインアップ
-curl -d '{"email":"sample@example.com", "password":"samplepassword"}' -H "Content-Type: application/json" -X POST http://localhost:3000/auth/signup
+mutation CreateUser {
+  createUser(data: { name: "新しい人", password: "1234qwer", email: "test@example.com" }) {
+    id
+    email
+    name
+  }
+}
 
 # サインイン
-curl -d '{"email":"sample@example.com", "password":"samplepassword"}' -H "Content-Type: application/json" -X POST http://localhost:3000/auth/signin
+mutation SignIn {
+  signIn(data: { email: "test@example.com", password: "1234qwer" }) {
+    token
+  }
+}
 
 # サインアウト
-curl -v -X DELETE -H 'content-type: application/json' -H 'authorization: Bearer <トークン>' http://localhost:3000/auth/signout
+mutation {
+  signOut {
+    statusCode
+    message
+  }
+}
+※ Headerに"Authorization": "Bearer SignInの戻り値"を設定する
 ```
 
 
@@ -29,8 +45,14 @@ curl -v -X DELETE -H 'content-type: application/json' -H 'authorization: Bearer 
 http://localhost:3000/graphql
 
 ## モデルの自動生成コマンド
+### マイグレーション
 ① prisma/schema.prismaを編集(手動)  
-② 「npx prisma migrate dev --name ＜コメント＞」を実行  
+②「npx prisma migrate dev --name ＜コメント＞」を実行  
 ③「npx prisma generate」を実行  
-④「src/@generated」の下に自動生成ソースが配置されるので適所に配置  
-
+### ファイル生成
+④「npx nest generate class <モデル名(例 users)>.models」を実行  
+⑤「npx nest generate module <モデル名(例 users)>」を実行  
+⑥「npx nest generate service <モデル名(例 users)>」を実行  
+⑦「npx nest generate resolver <モデル名(例 users)>」を実行  
+参考：https://zenn.dev/mseto/articles/nest-graphql-prisma#users-module%E3%80%81service%E3%80%81resolver%E3%81%AE%E4%BD%9C%E6%88%90  
+⑧「src/@generated」の下に自動生成ソースが配置されるので適所に配置  

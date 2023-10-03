@@ -6,4 +6,4 @@ import { SampleResolver } from './sample.resolver';
 @Module({
   providers: [SampleResolver, SampleService, PrismaService],
 })
-export class SampleModule { }
+export class SampleModule {}

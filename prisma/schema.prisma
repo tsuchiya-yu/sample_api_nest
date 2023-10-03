@@ -17,3 +17,15 @@ model Sample {
   title  String?
   content String
 }
+
+model User {
+  id        Int @default(autoincrement()) @id
+  email     String @unique
+  password  String
+  name      String
+  isDeleted Boolean @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}

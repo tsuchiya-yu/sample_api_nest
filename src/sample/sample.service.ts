@@ -5,7 +5,7 @@ import { UpdateSampleInput } from './dto/update-sample.input';
 
 @Injectable()
 export class SampleService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   create(createSampleInput: CreateSampleInput) {
     return 'This action adds a new sample';
@@ -16,7 +16,7 @@ export class SampleService {
       orderBy: {
         id: 'asc',
       },
-    })
+    });
   }
 
   findOne(id: number) {

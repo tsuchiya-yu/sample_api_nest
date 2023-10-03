@@ -5,7 +5,7 @@ import { UpdateSampleInput } from './dto/update-sample.input';
 
 @Resolver('Sample')
 export class SampleResolver {
-  constructor(private readonly sampleService: SampleService) { }
+  constructor(private readonly sampleService: SampleService) {}
 
   @Mutation('createSample')
   create(@Args('createSampleInput') createSampleInput: CreateSampleInput) {

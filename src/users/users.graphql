@@ -1,0 +1,45 @@
+scalar DateTime
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  password: String!
+  isDeleted: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input UserCreateInput {
+  name: String!
+  email: String!
+  password: String!
+  isDeleted: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+input SignInUserArgs {
+  email: String!
+  password: String!
+}
+
+type CodeMeg {
+  statusCode: Int!
+  message: String!
+}
+
+type Token {
+  token: String!
+}
+
+type Query {
+  user(id: Int!): User
+  dummyUser(id: Int!): User
+}
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  signIn(data: SignInUserArgs!): Token!
+  signOut: CodeMeg!
+}
