@@ -41,7 +41,7 @@ mutation {
 
 
 ## 画面
-### graphqlの管理画面
+### graphqlのplayground
 http://localhost:3000/graphql
 
 ## モデルの自動生成コマンド
