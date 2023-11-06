@@ -8,6 +8,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum SortOrder {
+    asc = "asc",
+    desc = "desc"
+}
+
 export class CreateSampleInput {
     id: number;
     title?: Nullable<string>;
@@ -16,6 +21,14 @@ export class CreateSampleInput {
 
 export class UpdateSampleInput {
     id: number;
+}
+
+export class SiteUpdatesOrderByWithRelationInput {
+    id?: Nullable<SortOrder>;
+    title?: Nullable<SortOrder>;
+    content?: Nullable<SortOrder>;
+    publishedAt?: Nullable<SortOrder>;
+    updatedAt?: Nullable<SortOrder>;
 }
 
 export class UserCreateInput {
@@ -43,6 +56,10 @@ export abstract class IQuery {
 
     abstract sample(id: number): Nullable<Sample> | Promise<Nullable<Sample>>;
 
+    abstract siteUpdates(orderBy?: Nullable<Nullable<SiteUpdatesOrderByWithRelationInput>[]>): Nullable<Nullable<SiteUpdates>[]> | Promise<Nullable<Nullable<SiteUpdates>[]>>;
+
+    abstract siteUpdate(id: number): Nullable<SiteUpdates> | Promise<Nullable<SiteUpdates>>;
+
     abstract user(id: number): Nullable<User> | Promise<Nullable<User>>;
 
     abstract dummyUser(id: number): Nullable<User> | Promise<Nullable<User>>;
@@ -60,6 +77,14 @@ export abstract class IMutation {
     abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
 
     abstract signOut(): CodeMeg | Promise<CodeMeg>;
+}
+
+export class SiteUpdates {
+    id: number;
+    title: string;
+    content: string;
+    publishedAt: DateTime;
+    updatedAt: DateTime;
 }
 
 export class User {
