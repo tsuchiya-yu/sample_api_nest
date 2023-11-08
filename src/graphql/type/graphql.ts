@@ -13,6 +13,14 @@ export enum SortOrder {
     desc = "desc"
 }
 
+export enum SiteUpdatesScalarFieldEnum {
+    id = "id",
+    title = "title",
+    content = "content",
+    publishedAt = "publishedAt",
+    updatedAt = "updatedAt"
+}
+
 export class CreateSampleInput {
     id: number;
     title?: Nullable<string>;
@@ -23,12 +31,96 @@ export class UpdateSampleInput {
     id: number;
 }
 
+export class SiteUpdatesWhereInput {
+    id?: Nullable<IntFilter>;
+    title?: Nullable<StringFilter>;
+    content?: Nullable<StringFilter>;
+    publishedAt?: Nullable<DateTimeFilter>;
+    updatedAt?: Nullable<DateTimeFilter>;
+}
+
+export class SiteUpdatesWhereUniqueInput {
+    id?: Nullable<number>;
+}
+
 export class SiteUpdatesOrderByWithRelationInput {
     id?: Nullable<SortOrder>;
     title?: Nullable<SortOrder>;
     content?: Nullable<SortOrder>;
     publishedAt?: Nullable<SortOrder>;
     updatedAt?: Nullable<SortOrder>;
+}
+
+export class IntFilter {
+    equals?: Nullable<number>;
+    in?: Nullable<Nullable<number>[]>;
+    notIn?: Nullable<Nullable<number>[]>;
+    lt?: Nullable<number>;
+    lte?: Nullable<number>;
+    gt?: Nullable<number>;
+    gte?: Nullable<number>;
+    not?: Nullable<NestedIntFilter>;
+}
+
+export class StringFilter {
+    equals?: Nullable<string>;
+    in?: Nullable<Nullable<string>[]>;
+    notIn?: Nullable<Nullable<string>[]>;
+    lt?: Nullable<string>;
+    lte?: Nullable<string>;
+    gt?: Nullable<string>;
+    gte?: Nullable<string>;
+    contains?: Nullable<string>;
+    startsWith?: Nullable<string>;
+    endsWith?: Nullable<string>;
+    not?: Nullable<NestedStringFilter>;
+}
+
+export class NestedIntFilter {
+    equals?: Nullable<number>;
+    in?: Nullable<Nullable<number>[]>;
+    notIn?: Nullable<Nullable<number>[]>;
+    lt?: Nullable<number>;
+    lte?: Nullable<number>;
+    gt?: Nullable<number>;
+    gte?: Nullable<number>;
+    not?: Nullable<NestedIntFilter>;
+}
+
+export class NestedStringFilter {
+    equals?: Nullable<string>;
+    in?: Nullable<Nullable<string>[]>;
+    notIn?: Nullable<Nullable<string>[]>;
+    lt?: Nullable<string>;
+    lte?: Nullable<string>;
+    gt?: Nullable<string>;
+    gte?: Nullable<string>;
+    contains?: Nullable<string>;
+    startsWith?: Nullable<string>;
+    endsWith?: Nullable<string>;
+    not?: Nullable<NestedStringFilter>;
+}
+
+export class DateTimeFilter {
+    equals?: Nullable<DateTime>;
+    in?: Nullable<Nullable<DateTime>[]>;
+    notIn?: Nullable<Nullable<DateTime>[]>;
+    lt?: Nullable<DateTime>;
+    lte?: Nullable<DateTime>;
+    gt?: Nullable<DateTime>;
+    gte?: Nullable<DateTime>;
+    not?: Nullable<NestedDateTimeFilter>;
+}
+
+export class NestedDateTimeFilter {
+    equals?: Nullable<DateTime>;
+    in?: Nullable<Nullable<DateTime>[]>;
+    notIn?: Nullable<Nullable<DateTime>[]>;
+    lt?: Nullable<DateTime>;
+    lte?: Nullable<DateTime>;
+    gt?: Nullable<DateTime>;
+    gte?: Nullable<DateTime>;
+    not?: Nullable<NestedDateTimeFilter>;
 }
 
 export class UserCreateInput {
@@ -56,7 +148,7 @@ export abstract class IQuery {
 
     abstract sample(id: number): Nullable<Sample> | Promise<Nullable<Sample>>;
 
-    abstract siteUpdates(orderBy?: Nullable<Nullable<SiteUpdatesOrderByWithRelationInput>[]>): Nullable<Nullable<SiteUpdates>[]> | Promise<Nullable<Nullable<SiteUpdates>[]>>;
+    abstract siteUpdates(where?: Nullable<SiteUpdatesWhereInput>, orderBy?: Nullable<Nullable<SiteUpdatesOrderByWithRelationInput>[]>, cursor?: Nullable<SiteUpdatesWhereUniqueInput>, take?: Nullable<number>, skip?: Nullable<number>, distinct?: Nullable<Nullable<SiteUpdatesScalarFieldEnum>[]>): Nullable<Nullable<SiteUpdates>[]> | Promise<Nullable<Nullable<SiteUpdates>[]>>;
 
     abstract siteUpdate(id: number): Nullable<SiteUpdates> | Promise<Nullable<SiteUpdates>>;
 

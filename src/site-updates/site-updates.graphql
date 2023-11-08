@@ -9,8 +9,27 @@ type SiteUpdates {
 }
 
 type Query {
-  siteUpdates(orderBy: [SiteUpdatesOrderByWithRelationInput]): [SiteUpdates]
+  siteUpdates(
+    where: SiteUpdatesWhereInput, 
+    orderBy: [SiteUpdatesOrderByWithRelationInput],
+    cursor: SiteUpdatesWhereUniqueInput,
+    take: Int,
+    skip: Int,
+    distinct: [SiteUpdatesScalarFieldEnum]
+  ): [SiteUpdates]
   siteUpdate(id: Int!): SiteUpdates
+}
+
+input SiteUpdatesWhereInput {
+  id: IntFilter
+  title: StringFilter
+  content: StringFilter
+  publishedAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input SiteUpdatesWhereUniqueInput {
+  id: Int
 }
 
 input SiteUpdatesOrderByWithRelationInput {
@@ -24,4 +43,84 @@ input SiteUpdatesOrderByWithRelationInput {
 enum SortOrder {
   asc
   desc
+}
+
+enum SiteUpdatesScalarFieldEnum {
+  id
+  title
+  content
+  publishedAt
+  updatedAt
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
 }
