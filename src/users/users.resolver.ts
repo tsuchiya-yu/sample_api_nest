@@ -29,8 +29,6 @@ export class UsersResolver {
     @Mutation(() => User)
     async createUser(@Args() args: CreateOneUserArgs): Promise<User> {
         console.log('call: createUser#UsersResolver');
-        // console.log(args);
-
         try {
             const auth = getAuth(firebaseApp);
             const user = await this.userService.createUser(args);

@@ -5,6 +5,9 @@ import { ConfigModule } from '@nestjs/config';
 import { SampleModule } from './sample/sample.module';
 import { UsersModule } from './users/users.module';
 import { SiteUpdatesModule } from './site-updates/site-updates.module';
+import { WinstonModule } from 'nest-winston';
+import { logger } from './logger/winston.logger';
+
 @Module({
   imports: [
     GraphQLServerModule,
@@ -13,6 +16,9 @@ import { SiteUpdatesModule } from './site-updates/site-updates.module';
     ConfigModule.forRoot({ isGlobal: true }),
     UsersModule,
     SiteUpdatesModule,
+    WinstonModule.forRoot({
+      transports: logger.transports,
+    }),
   ],
 })
 export class AppModule { }

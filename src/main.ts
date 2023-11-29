@@ -33,6 +33,11 @@ async function bootstrap() {
     credential: admin.credential.cert(adminConfig),
   });
 
+  app.useLogger(['error', 'warn', 'log', 'debug', 'verbose']);
+
+  // for CORS
+  app.enableCors();
+
   await app.listen(3000);
 }
 bootstrap();

@@ -10,6 +10,7 @@ export class SiteUpdatesResolver {
 
     @Query(() => [SiteUpdates], { nullable: true })
     async siteUpdates(@Args() args: FindManySiteUpdatesArgs): Promise<SiteUpdates[]> {
+        console.log('call: siteUpdates#SiteUpdatesResolver');
         const siteUpdates = await this.siteUpdatesService.findAll(args);
         if (!siteUpdates) {
             throw new HttpException('Site updates not found', HttpStatus.NOT_FOUND);
