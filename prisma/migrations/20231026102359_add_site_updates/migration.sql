@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `siteUpdates` (
+CREATE TABLE `site_updates` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `content` VARCHAR(191) NOT NULL,

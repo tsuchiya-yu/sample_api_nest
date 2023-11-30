@@ -21,16 +21,6 @@ export enum SiteUpdatesScalarFieldEnum {
     updatedAt = "updatedAt"
 }
 
-export class CreateSampleInput {
-    id: number;
-    title?: Nullable<string>;
-    content: string;
-}
-
-export class UpdateSampleInput {
-    id: number;
-}
-
 export class SiteUpdatesWhereInput {
     id?: Nullable<IntFilter>;
     title?: Nullable<StringFilter>;
@@ -137,17 +127,15 @@ export class SignInUserArgs {
     password: string;
 }
 
-export class Sample {
+export class SiteUpdates {
     id: number;
-    title?: Nullable<string>;
+    title: string;
     content: string;
+    publishedAt: DateTime;
+    updatedAt: DateTime;
 }
 
 export abstract class IQuery {
-    abstract samples(): Nullable<Sample>[] | Promise<Nullable<Sample>[]>;
-
-    abstract sample(id: number): Nullable<Sample> | Promise<Nullable<Sample>>;
-
     abstract siteUpdates(where?: Nullable<SiteUpdatesWhereInput>, orderBy?: Nullable<Nullable<SiteUpdatesOrderByWithRelationInput>[]>, cursor?: Nullable<SiteUpdatesWhereUniqueInput>, take?: Nullable<number>, skip?: Nullable<number>, distinct?: Nullable<Nullable<SiteUpdatesScalarFieldEnum>[]>): Nullable<Nullable<SiteUpdates>[]> | Promise<Nullable<Nullable<SiteUpdates>[]>>;
 
     abstract siteUpdate(id: number): Nullable<SiteUpdates> | Promise<Nullable<SiteUpdates>>;
@@ -155,28 +143,6 @@ export abstract class IQuery {
     abstract user(id: number): Nullable<User> | Promise<Nullable<User>>;
 
     abstract dummyUser(id: number): Nullable<User> | Promise<Nullable<User>>;
-}
-
-export abstract class IMutation {
-    abstract createSample(createSampleInput: CreateSampleInput): Sample | Promise<Sample>;
-
-    abstract updateSample(updateSampleInput: UpdateSampleInput): Sample | Promise<Sample>;
-
-    abstract removeSample(id: number): Nullable<Sample> | Promise<Nullable<Sample>>;
-
-    abstract createUser(data: UserCreateInput): User | Promise<User>;
-
-    abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
-
-    abstract signOut(): CodeMeg | Promise<CodeMeg>;
-}
-
-export class SiteUpdates {
-    id: number;
-    title: string;
-    content: string;
-    publishedAt: DateTime;
-    updatedAt: DateTime;
 }
 
 export class User {
@@ -196,6 +162,14 @@ export class CodeMeg {
 
 export class Token {
     token: string;
+}
+
+export abstract class IMutation {
+    abstract createUser(data: UserCreateInput): User | Promise<User>;
+
+    abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
+
+    abstract signOut(): CodeMeg | Promise<CodeMeg>;
 }
 
 export type DateTime = any;
