@@ -1,6 +1,5 @@
 ## 環境構築
-① ブランチをpullしてdocker compose upすればOK。  
-② Firebaseの設定が必要。  
+ブランチをpullしてdocker compose upすればOK。  
 
 ## コマンド
 

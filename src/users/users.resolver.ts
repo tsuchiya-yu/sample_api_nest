@@ -5,19 +5,16 @@ import { CodeMeg } from './code-msg.response'
 import { Token } from './token.response'
 import { CreateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/create-one-user.args';
 import { UsersService } from 'src/users/users.service';
-import { FindFirstUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-first-user.args';
-import { firebaseApp } from '../main';
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-} from 'firebase/auth';
 import { HttpException, HttpStatus } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
+import { AuthService } from 'src/auth/auth.service';
 
 @Resolver(() => User)
 export class UsersResolver {
-    constructor(private readonly userService: UsersService) { }
+    constructor(
+        private readonly userService: UsersService,
+        private readonly authService: AuthService,
+    ) { }
 
     // ダミーのレスポンスを返す(動作確認用)
     @Query(() => User)
@@ -30,16 +27,15 @@ export class UsersResolver {
     async createUser(@Args() args: CreateOneUserArgs): Promise<User> {
         console.log('call: createUser#UsersResolver');
         try {
-            const auth = getAuth(firebaseApp);
-            const user = await this.userService.createUser(args);
-            console.log(user);
+            // bcryptを使用してパスワードをハッシュ化
+            const hashedPassword = await bcrypt.hash(args.data.password, 10);
 
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                user['email'],
-                user['password']
-            );
-            userCredential.user;
+            // args.dataのpasswordプロパティを更新
+            args.data.password = hashedPassword;
+
+            // UserServiceを使用してユーザーを作成
+            const user = await this.userService.createUser(args);
+            console.log('created user:' + user);
 
             return user;
         } catch (error) {
@@ -57,26 +53,21 @@ export class UsersResolver {
     async signIn(@Args('data') args: SignInUserArgs): Promise<Token> {
         console.log('call: signIn#UsersResolver');
         try {
-            const auth = getAuth(firebaseApp);
-            const userCredential = await signInWithEmailAndPassword(
-                auth,
-                args.email,
-                args.password,
-            );
-
-            const firebaseUser = userCredential.user;
-
-            // ここでusersテーブルから一致するemailを検索
-            const user = await this.userService.findUserByEmail(firebaseUser.email);
-
+            const user = await this.userService.findUserByEmail(args.email);
             if (!user) {
-                throw new HttpException('ユーザーが見つかりません。', HttpStatus.NOT_FOUND);
+              throw new HttpException('ユーザーが見つかりません。', HttpStatus.NOT_FOUND);
             }
-
-            const idToken = await firebaseUser.getIdToken();
-
-            return { token: idToken };
-        } catch (error) {
+      
+            // パスワードの検証
+            const passwordIsValid = await bcrypt.compare(args.password, user.password);
+            if (!passwordIsValid) {
+              throw new HttpException('パスワードが不正です。', HttpStatus.UNAUTHORIZED);
+            }
+      
+            // JWTトークンの生成
+            const token = await this.authService.login(user);
+            return token;
+          } catch (error) {
             if (error.code === 'auth/wrong-password') {
                 throw new HttpException('パスワードが不正です。', HttpStatus.UNAUTHORIZED);
             }
@@ -89,10 +80,9 @@ export class UsersResolver {
     // ユーザログアウト
     @Mutation(() => User)
     async signOut(): Promise<CodeMeg> {
+        // TODO:おいおいリフレッシュトークンでのログアウトに変更する
         console.log('call: signOut#UsersResolver');
         try {
-            const auth = getAuth(firebaseApp);
-            await signOut(auth);
             return { statusCode: 200, message: 'OK!' };
         } catch (error) {
             console.error(error);

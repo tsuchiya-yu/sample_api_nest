@@ -22,7 +22,6 @@ export class UsersService {
     }
 
     async findUserByEmail(email: string): Promise<User> {
-        // Prisma や TypeORM を使っている場合
         const user = await this.prisma.user.findUnique({
             where: { email: email },
         });
