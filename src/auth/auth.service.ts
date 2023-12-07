@@ -23,9 +23,7 @@ export class AuthService {
   async login(user: any): Promise<Token> {
     const payload = { email: user.email, sub: user.userId };
     return {
-      token: this.jwtService.sign(payload, {
-        expiresIn: '7d', // 7日後に期限切れ
-      }),
+      token: this.jwtService.sign(payload, {}),
     };
   }
 }

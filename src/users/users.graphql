@@ -36,6 +36,7 @@ type Token {
 type Query {
   user(id: Int!): User
   dummyUser(id: Int!): User
+  isUserLoggedIn: Boolean!
 }
 
 type Mutation {

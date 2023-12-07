@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, Context } from '@nestjs/graphql';
 import { User } from './users.model'
 import { SignInUserArgs } from './user-signin.args'
 import { CodeMeg } from './code-msg.response'
@@ -8,12 +8,14 @@ import { UsersService } from 'src/users/users.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from 'src/auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Resolver(() => User)
 export class UsersResolver {
     constructor(
         private readonly userService: UsersService,
         private readonly authService: AuthService,
+        private readonly jwtService: JwtService,
     ) { }
 
     // ダミーのレスポンスを返す(動作確認用)
@@ -87,6 +89,24 @@ export class UsersResolver {
         } catch (error) {
             console.error(error);
             throw new HttpException('ログアウトに失敗しました。', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // ログイン状態？
+    @Query(() => Boolean)
+    async isUserLoggedIn(@Context() context): Promise<boolean> {
+        console.log('call: isUserLoggedIn#UsersResolver');
+        try {
+            const authHeader = context.req.headers.authorization;
+            if (!authHeader) {
+                return false;
+            }
+
+            const token = authHeader.split(' ')[1];
+            const decoded = this.jwtService.verify(token);
+            return !!decoded;
+        } catch (error) {
+            throw new HttpException('トークンの検証に失敗しました。', HttpStatus.UNAUTHORIZED);
         }
     }
 

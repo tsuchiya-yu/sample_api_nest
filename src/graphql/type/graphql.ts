@@ -143,6 +143,8 @@ export abstract class IQuery {
     abstract user(id: number): Nullable<User> | Promise<Nullable<User>>;
 
     abstract dummyUser(id: number): Nullable<User> | Promise<Nullable<User>>;
+
+    abstract isUserLoggedIn(): boolean | Promise<boolean>;
 }
 
 export class User {
