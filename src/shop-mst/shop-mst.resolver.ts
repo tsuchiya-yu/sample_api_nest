@@ -11,10 +11,10 @@ export class ShopMstResolver {
     @Query(() => [ShopMst], { nullable: true })
     async shopMsts(@Args() args: FindManyshopMstArgs): Promise<ShopMst[]> {
         console.log('call: shoMsts#ShopMstResolver');
-        const shoMsts = await this.shopMstService.findAll(args);
-        if (!shoMsts) {
+        const shopMsts = await this.shopMstService.findAll(args);
+        if (!shopMsts) {
             throw new HttpException('shop Mst not found', HttpStatus.NOT_FOUND);
         }
-        return shoMsts;
+        return shopMsts;
     }
 }
