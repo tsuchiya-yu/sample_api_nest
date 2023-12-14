@@ -15,7 +15,7 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  isDeleted Boolean  @default(false)
+  isDeleted Boolean  @default(false) @map("is_deleted")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   email     String   @unique
@@ -28,8 +28,19 @@ model SiteUpdates {
   id          Int      @id @default(autoincrement())
   title       String
   content     String
-  publishedAt DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  publishedAt DateTime @default(now())  @map("published_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("site_updates")
+}
+
+model shopMst {
+  id          Int      @id @default(autoincrement())
+  code        String   @unique
+  name        String
+  isDeleted Boolean  @default(false) @map("is_deleted")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("shop_mst")
 }
