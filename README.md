@@ -48,7 +48,7 @@ http://localhost:3000/graphql
 ②「npx prisma migrate dev --name ＜コメント＞」を実行  
 ③「npx prisma generate」を実行  
 ### ファイル生成
-④「npx nest generate class <モデル名(例 users)>.models」を実行  
+④「npx nest generate class <モデル名(例 users)>」を実行  
 ⑤「npx nest generate module <モデル名(例 users)>」を実行  
 ⑥「npx nest generate service <モデル名(例 users)>」を実行  
 ⑦「npx nest generate resolver <モデル名(例 users)>」を実行  

@@ -1,0 +1,63 @@
+scalar DateTime
+
+type ShopMst {
+  id: Int!
+  code: String!
+  name: String!
+  isDeleted: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  shopMsts(
+    where: ShopMstWhereInput, 
+    orderBy: [ShopMstOrderByWithRelationInput],
+    cursor: ShopMstWhereUniqueInput,
+    take: Int,
+    skip: Int,
+    distinct: [ShopMstScalarFieldEnum]
+  ): [ShopMst]
+  shopMst(id: Int!): ShopMst
+}
+
+input ShopMstWhereInput {
+  id: IntFilter
+  code: StringFilter
+  name: StringFilter
+  isDeleted: BooleanFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input ShopMstWhereUniqueInput {
+  id: Int
+}
+
+input ShopMstOrderByWithRelationInput {
+  id: SortOrder
+  code: SortOrder
+  name: SortOrder
+  isDeleted: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+enum ShopMstScalarFieldEnum {
+  id
+  code
+  name
+  isDeleted
+  createdAt
+  updatedAt
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: NestedBooleanFilter
+}
+
+input NestedBooleanFilter {
+  equals: Boolean
+  not: NestedBooleanFilter
+}

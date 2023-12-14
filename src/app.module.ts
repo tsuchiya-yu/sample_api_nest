@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { SiteUpdatesModule } from './site-updates/site-updates.module';
 import { WinstonModule } from 'nest-winston';
 import { logger } from './logger/winston.logger';
+import { ShopMstModule } from './shop-mst/shop-mst.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { logger } from './logger/winston.logger';
     WinstonModule.forRoot({
       transports: logger.transports,
     }),
+    ShopMstModule,
   ],
 })
 export class AppModule { }

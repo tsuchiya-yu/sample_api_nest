@@ -8,6 +8,15 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum ShopMstScalarFieldEnum {
+    id = "id",
+    code = "code",
+    name = "name",
+    isDeleted = "isDeleted",
+    createdAt = "createdAt",
+    updatedAt = "updatedAt"
+}
+
 export enum SortOrder {
     asc = "asc",
     desc = "desc"
@@ -19,6 +28,38 @@ export enum SiteUpdatesScalarFieldEnum {
     content = "content",
     publishedAt = "publishedAt",
     updatedAt = "updatedAt"
+}
+
+export class ShopMstWhereInput {
+    id?: Nullable<IntFilter>;
+    code?: Nullable<StringFilter>;
+    name?: Nullable<StringFilter>;
+    isDeleted?: Nullable<BooleanFilter>;
+    createdAt?: Nullable<DateTimeFilter>;
+    updatedAt?: Nullable<DateTimeFilter>;
+}
+
+export class ShopMstWhereUniqueInput {
+    id?: Nullable<number>;
+}
+
+export class ShopMstOrderByWithRelationInput {
+    id?: Nullable<SortOrder>;
+    code?: Nullable<SortOrder>;
+    name?: Nullable<SortOrder>;
+    isDeleted?: Nullable<SortOrder>;
+    createdAt?: Nullable<SortOrder>;
+    updatedAt?: Nullable<SortOrder>;
+}
+
+export class BooleanFilter {
+    equals?: Nullable<boolean>;
+    not?: Nullable<NestedBooleanFilter>;
+}
+
+export class NestedBooleanFilter {
+    equals?: Nullable<boolean>;
+    not?: Nullable<NestedBooleanFilter>;
 }
 
 export class SiteUpdatesWhereInput {
@@ -127,15 +168,20 @@ export class SignInUserArgs {
     password: string;
 }
 
-export class SiteUpdates {
+export class ShopMst {
     id: number;
-    title: string;
-    content: string;
-    publishedAt: DateTime;
+    code: string;
+    name: string;
+    isDeleted: boolean;
+    createdAt: DateTime;
     updatedAt: DateTime;
 }
 
 export abstract class IQuery {
+    abstract shopMsts(where?: Nullable<ShopMstWhereInput>, orderBy?: Nullable<Nullable<ShopMstOrderByWithRelationInput>[]>, cursor?: Nullable<ShopMstWhereUniqueInput>, take?: Nullable<number>, skip?: Nullable<number>, distinct?: Nullable<Nullable<ShopMstScalarFieldEnum>[]>): Nullable<Nullable<ShopMst>[]> | Promise<Nullable<Nullable<ShopMst>[]>>;
+
+    abstract shopMst(id: number): Nullable<ShopMst> | Promise<Nullable<ShopMst>>;
+
     abstract siteUpdates(where?: Nullable<SiteUpdatesWhereInput>, orderBy?: Nullable<Nullable<SiteUpdatesOrderByWithRelationInput>[]>, cursor?: Nullable<SiteUpdatesWhereUniqueInput>, take?: Nullable<number>, skip?: Nullable<number>, distinct?: Nullable<Nullable<SiteUpdatesScalarFieldEnum>[]>): Nullable<Nullable<SiteUpdates>[]> | Promise<Nullable<Nullable<SiteUpdates>[]>>;
 
     abstract siteUpdate(id: number): Nullable<SiteUpdates> | Promise<Nullable<SiteUpdates>>;
@@ -145,6 +191,14 @@ export abstract class IQuery {
     abstract dummyUser(id: number): Nullable<User> | Promise<Nullable<User>>;
 
     abstract isUserLoggedIn(): boolean | Promise<boolean>;
+}
+
+export class SiteUpdates {
+    id: number;
+    title: string;
+    content: string;
+    publishedAt: DateTime;
+    updatedAt: DateTime;
 }
 
 export class User {
