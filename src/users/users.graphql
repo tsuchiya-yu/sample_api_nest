@@ -40,7 +40,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
+  createUser(data: UserCreateInput!): Token!
   signIn(data: SignInUserArgs!): Token!
   signOut: CodeMeg!
 }

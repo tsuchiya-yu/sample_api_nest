@@ -167,7 +167,7 @@ export class Token {
 }
 
 export abstract class IMutation {
-    abstract createUser(data: UserCreateInput): User | Promise<User>;
+    abstract createUser(data: UserCreateInput): Token | Promise<Token>;
 
     abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
 

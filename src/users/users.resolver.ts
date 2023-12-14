@@ -25,8 +25,8 @@ export class UsersResolver {
     }
 
     // ユーザ新規登録
-    @Mutation(() => User)
-    async createUser(@Args() args: CreateOneUserArgs): Promise<User> {
+    @Mutation(() => Token)
+    async createUser(@Args() args: CreateOneUserArgs): Promise<Token> {
         console.log('call: createUser#UsersResolver');
         try {
             // bcryptを使用してパスワードをハッシュ化
@@ -39,7 +39,9 @@ export class UsersResolver {
             const user = await this.userService.createUser(args);
             console.log('created user:' + user);
 
-            return user;
+            // JWTトークンの生成
+            const token = await this.authService.login(user);
+            return token;
         } catch (error) {
             if (error.code === 'P2002' && error.meta.target.includes('email')) {
                 // ユニーク制約違反のエラー処理
