@@ -18,7 +18,6 @@ type Query {
     skip: Int,
     distinct: [ShopMstScalarFieldEnum]
   ): [ShopMst]
-  shopMst(id: Int!): ShopMst
 }
 
 input ShopMstWhereInput {
