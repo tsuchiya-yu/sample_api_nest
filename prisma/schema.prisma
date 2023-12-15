@@ -21,6 +21,9 @@ model User {
   email     String   @unique
   password  String
 
+  userProfile  UserProfile?
+  userSns   UserSns?
+
   @@map("users")
 }
 
@@ -34,7 +37,7 @@ model SiteUpdates {
   @@map("site_updates")
 }
 
-model shopMst {
+model ShopMst {
   id          Int      @id @default(autoincrement())
   code        String   @unique
   name        String
@@ -42,5 +45,36 @@ model shopMst {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
+  userProfiles UserProfile[]
+
   @@map("shop_mst")
+}
+
+model UserProfile {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @unique @map("user_id")
+  shopMstId   Int?     @map("shop_mst_id")
+  catchphrase String?
+  introduction String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user        User     @relation(fields: [userId], references: [id])
+  shopMst     ShopMst? @relation(fields: [shopMstId], references: [id])
+
+  @@map("user_profiles")
+}
+
+model UserSns {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  x         String?
+  facebook  String?
+  twitter   String?
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("user_sns")
 }
