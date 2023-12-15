@@ -1,0 +1,32 @@
+type UserProfile {
+  id: Int!
+  userId: Int!
+  shopMstId: Int
+  catchphrase: String
+  introduction: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CreateUserProfileInput {
+  userId: Int!
+  shopMstId: Int
+  catchphrase: String
+  introduction: String
+}
+
+input UpdateUserProfileInput {
+  shopMstId: Int
+  catchphrase: String
+  introduction: String
+}
+
+type Query {
+  userProfile(id: Int!): UserProfile
+  userProfiles: [UserProfile!]!
+}
+
+type Mutation {
+  createUserProfile(data: CreateUserProfileInput!): UserProfile!
+  updateUserProfile(id: Int!, data: UpdateUserProfileInput!): UserProfile!
+}

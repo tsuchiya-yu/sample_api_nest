@@ -154,6 +154,19 @@ export class NestedDateTimeFilter {
     not?: Nullable<NestedDateTimeFilter>;
 }
 
+export class CreateUserProfileInput {
+    userId: number;
+    shopMstId?: Nullable<number>;
+    catchphrase?: Nullable<string>;
+    introduction?: Nullable<string>;
+}
+
+export class UpdateUserProfileInput {
+    shopMstId?: Nullable<number>;
+    catchphrase?: Nullable<string>;
+    introduction?: Nullable<string>;
+}
+
 export class UserCreateInput {
     name: string;
     email: string;
@@ -180,11 +193,13 @@ export class ShopMst {
 export abstract class IQuery {
     abstract shopMsts(where?: Nullable<ShopMstWhereInput>, orderBy?: Nullable<Nullable<ShopMstOrderByWithRelationInput>[]>, cursor?: Nullable<ShopMstWhereUniqueInput>, take?: Nullable<number>, skip?: Nullable<number>, distinct?: Nullable<Nullable<ShopMstScalarFieldEnum>[]>): Nullable<Nullable<ShopMst>[]> | Promise<Nullable<Nullable<ShopMst>[]>>;
 
-    abstract shopMst(id: number): Nullable<ShopMst> | Promise<Nullable<ShopMst>>;
-
     abstract siteUpdates(where?: Nullable<SiteUpdatesWhereInput>, orderBy?: Nullable<Nullable<SiteUpdatesOrderByWithRelationInput>[]>, cursor?: Nullable<SiteUpdatesWhereUniqueInput>, take?: Nullable<number>, skip?: Nullable<number>, distinct?: Nullable<Nullable<SiteUpdatesScalarFieldEnum>[]>): Nullable<Nullable<SiteUpdates>[]> | Promise<Nullable<Nullable<SiteUpdates>[]>>;
 
     abstract siteUpdate(id: number): Nullable<SiteUpdates> | Promise<Nullable<SiteUpdates>>;
+
+    abstract userProfile(id: number): Nullable<UserProfile> | Promise<Nullable<UserProfile>>;
+
+    abstract userProfiles(): UserProfile[] | Promise<UserProfile[]>;
 
     abstract user(id: number): Nullable<User> | Promise<Nullable<User>>;
 
@@ -199,6 +214,28 @@ export class SiteUpdates {
     content: string;
     publishedAt: DateTime;
     updatedAt: DateTime;
+}
+
+export class UserProfile {
+    id: number;
+    userId: number;
+    shopMstId?: Nullable<number>;
+    catchphrase?: Nullable<string>;
+    introduction?: Nullable<string>;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export abstract class IMutation {
+    abstract createUserProfile(data: CreateUserProfileInput): UserProfile | Promise<UserProfile>;
+
+    abstract updateUserProfile(id: number, data: UpdateUserProfileInput): UserProfile | Promise<UserProfile>;
+
+    abstract createUser(data: UserCreateInput): Token | Promise<Token>;
+
+    abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
+
+    abstract signOut(): CodeMeg | Promise<CodeMeg>;
 }
 
 export class User {
@@ -218,14 +255,6 @@ export class CodeMeg {
 
 export class Token {
     token: string;
-}
-
-export abstract class IMutation {
-    abstract createUser(data: UserCreateInput): Token | Promise<Token>;
-
-    abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
-
-    abstract signOut(): CodeMeg | Promise<CodeMeg>;
 }
 
 export type DateTime = any;

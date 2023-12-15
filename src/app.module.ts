@@ -7,6 +7,7 @@ import { SiteUpdatesModule } from './site-updates/site-updates.module';
 import { WinstonModule } from 'nest-winston';
 import { logger } from './logger/winston.logger';
 import { ShopMstModule } from './shop-mst/shop-mst.module';
+import { UserProfileModule } from './user-profile/user-profile.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ShopMstModule } from './shop-mst/shop-mst.module';
       transports: logger.transports,
     }),
     ShopMstModule,
+    UserProfileModule,
   ],
 })
 export class AppModule { }
