@@ -8,6 +8,7 @@ import { WinstonModule } from 'nest-winston';
 import { logger } from './logger/winston.logger';
 import { ShopMstModule } from './shop-mst/shop-mst.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
+import { UserSnsModule } from './user-sns/user-sns.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
     }),
     ShopMstModule,
     UserProfileModule,
+    UserSnsModule,
   ],
 })
 export class AppModule { }

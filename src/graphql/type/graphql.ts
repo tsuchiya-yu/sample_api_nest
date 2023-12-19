@@ -167,6 +167,19 @@ export class UpdateUserProfileInput {
     introduction?: Nullable<string>;
 }
 
+export class CreateUserSnsInput {
+    userId: number;
+    x?: Nullable<string>;
+    facebook?: Nullable<string>;
+    twitter?: Nullable<string>;
+}
+
+export class UpdateUserSnsInput {
+    x?: Nullable<string>;
+    facebook?: Nullable<string>;
+    twitter?: Nullable<string>;
+}
+
 export class UserCreateInput {
     name: string;
     email: string;
@@ -199,7 +212,11 @@ export abstract class IQuery {
 
     abstract userProfile(id: number): Nullable<UserProfile> | Promise<Nullable<UserProfile>>;
 
-    abstract userProfiles(): UserProfile[] | Promise<UserProfile[]>;
+    abstract userProfiles(): Nullable<UserProfile[]> | Promise<Nullable<UserProfile[]>>;
+
+    abstract userSns(id: number): Nullable<UserSns> | Promise<Nullable<UserSns>>;
+
+    abstract userSnsList(): Nullable<UserSns[]> | Promise<Nullable<UserSns[]>>;
 
     abstract user(id: number): Nullable<User> | Promise<Nullable<User>>;
 
@@ -231,11 +248,25 @@ export abstract class IMutation {
 
     abstract updateUserProfile(id: number, data: UpdateUserProfileInput): UserProfile | Promise<UserProfile>;
 
+    abstract createUserSns(data: CreateUserSnsInput): UserSns | Promise<UserSns>;
+
+    abstract updateUserSns(id: number, data: UpdateUserSnsInput): UserSns | Promise<UserSns>;
+
     abstract createUser(data: UserCreateInput): Token | Promise<Token>;
 
     abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
 
     abstract signOut(): CodeMeg | Promise<CodeMeg>;
+}
+
+export class UserSns {
+    id: number;
+    userId: number;
+    createdAt: string;
+    updatedAt: string;
+    x?: Nullable<string>;
+    facebook?: Nullable<string>;
+    twitter?: Nullable<string>;
 }
 
 export class User {

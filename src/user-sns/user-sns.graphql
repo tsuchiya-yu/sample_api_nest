@@ -1,0 +1,32 @@
+type UserSns {
+  id: Int!
+  userId: Int!
+  createdAt: String!
+  updatedAt: String!
+  x: String
+  facebook: String
+  twitter: String
+}
+
+input CreateUserSnsInput {
+  userId: Int!
+  x: String
+  facebook: String
+  twitter: String
+}
+
+input UpdateUserSnsInput {
+  x: String
+  facebook: String
+  twitter: String
+}
+
+type Query {
+  userSns(id: Int!): UserSns
+  userSnsList: [UserSns!]
+}
+
+type Mutation {
+  createUserSns(data: CreateUserSnsInput!): UserSns!
+  updateUserSns(id: Int!, data: UpdateUserSnsInput!): UserSns!
+}

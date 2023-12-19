@@ -23,7 +23,7 @@ input UpdateUserProfileInput {
 
 type Query {
   userProfile(id: Int!): UserProfile
-  userProfiles: [UserProfile!]!
+  userProfiles: [UserProfile!]
 }
 
 type Mutation {
