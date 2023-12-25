@@ -112,4 +112,29 @@ export class UsersResolver {
         }
     }
 
+    // ログイン中ユーザの情報を取得
+    @Query(() => User, { nullable: true })
+    async currentUser(@Context() context): Promise<User | null> {
+        try {
+            const authHeader = context.req.headers.authorization;
+            if (!authHeader) {
+                return null;
+            }
+            const token = authHeader.split(' ')[1];
+            const decoded = this.jwtService.verify(token);
+            console.log(decoded);
+
+            // JWTトークンからメアドを取得
+            const email = decoded.email;
+            if (!email) {
+                return null;
+            }
+
+            // メアドに基づいてユーザーデータを取得
+            return await this.userService.findUserByEmail(email);
+        } catch (error) {
+            throw new HttpException('トークンの検証に失敗しました。', HttpStatus.UNAUTHORIZED);
+        }
+    }
+
 }

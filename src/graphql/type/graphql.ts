@@ -223,6 +223,8 @@ export abstract class IQuery {
     abstract dummyUser(id: number): Nullable<User> | Promise<Nullable<User>>;
 
     abstract isUserLoggedIn(): boolean | Promise<boolean>;
+
+    abstract currentUser(): Nullable<User> | Promise<Nullable<User>>;
 }
 
 export class SiteUpdates {
