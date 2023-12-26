@@ -14,8 +14,8 @@ export class UserProfile {
     @Field(() => Int, {nullable:false})
     userId!: number;
 
-    @Field(() => Int, {nullable:true})
-    shopMstId!: number | null;
+    @Field(() => String, {nullable:true})
+    shopMstCode!: string | null;
 
     @Field(() => String, {nullable:true})
     catchphrase!: string | null;

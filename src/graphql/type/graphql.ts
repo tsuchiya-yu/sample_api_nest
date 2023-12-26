@@ -156,13 +156,13 @@ export class NestedDateTimeFilter {
 
 export class CreateUserProfileInput {
     userId: number;
-    shopMstId?: Nullable<number>;
+    shopMstCode?: Nullable<string>;
     catchphrase?: Nullable<string>;
     introduction?: Nullable<string>;
 }
 
 export class UpdateUserProfileInput {
-    shopMstId?: Nullable<number>;
+    shopMstCode?: Nullable<string>;
     catchphrase?: Nullable<string>;
     introduction?: Nullable<string>;
 }
@@ -171,13 +171,13 @@ export class CreateUserSnsInput {
     userId: number;
     x?: Nullable<string>;
     facebook?: Nullable<string>;
-    twitter?: Nullable<string>;
+    instagram?: Nullable<string>;
 }
 
 export class UpdateUserSnsInput {
     x?: Nullable<string>;
     facebook?: Nullable<string>;
-    twitter?: Nullable<string>;
+    instagram?: Nullable<string>;
 }
 
 export class UserCreateInput {
@@ -238,7 +238,7 @@ export class SiteUpdates {
 export class UserProfile {
     id: number;
     userId: number;
-    shopMstId?: Nullable<number>;
+    shopMstCode?: Nullable<string>;
     catchphrase?: Nullable<string>;
     introduction?: Nullable<string>;
     createdAt: string;
@@ -268,7 +268,7 @@ export class UserSns {
     updatedAt: string;
     x?: Nullable<string>;
     facebook?: Nullable<string>;
-    twitter?: Nullable<string>;
+    instagram?: Nullable<string>;
 }
 
 export class User {

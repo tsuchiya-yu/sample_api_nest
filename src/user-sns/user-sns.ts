@@ -26,7 +26,7 @@ export class UserSns {
     facebook!: string | null;
 
     @Field(() => String, {nullable:true})
-    twitter!: string | null;
+    instagram!: string | null;
 
     @Field(() => User, {nullable:false})
     user?: User;

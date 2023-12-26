@@ -5,20 +5,20 @@ type UserSns {
   updatedAt: String!
   x: String
   facebook: String
-  twitter: String
+  instagram: String
 }
 
 input CreateUserSnsInput {
   userId: Int!
   x: String
   facebook: String
-  twitter: String
+  instagram: String
 }
 
 input UpdateUserSnsInput {
   x: String
   facebook: String
-  twitter: String
+  instagram: String
 }
 
 type Query {

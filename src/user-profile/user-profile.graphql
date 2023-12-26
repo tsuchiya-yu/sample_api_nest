@@ -1,7 +1,7 @@
 type UserProfile {
   id: Int!
   userId: Int!
-  shopMstId: Int
+  shopMstCode: String
   catchphrase: String
   introduction: String
   createdAt: String!
@@ -10,13 +10,13 @@ type UserProfile {
 
 input CreateUserProfileInput {
   userId: Int!
-  shopMstId: Int
+  shopMstCode: String
   catchphrase: String
   introduction: String
 }
 
 input UpdateUserProfileInput {
-  shopMstId: Int
+  shopMstCode: String
   catchphrase: String
   introduction: String
 }

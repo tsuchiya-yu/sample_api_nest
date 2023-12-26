@@ -53,14 +53,14 @@ model ShopMst {
 model UserProfile {
   id          Int      @id @default(autoincrement())
   userId      Int      @unique @map("user_id")
-  shopMstId   Int?     @map("shop_mst_id")
+  shopMstCode   String?     @map("shop_mst_code")
   catchphrase String?
   introduction String?
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
   user        User     @relation(fields: [userId], references: [id])
-  shopMst     ShopMst? @relation(fields: [shopMstId], references: [id])
+  shopMst     ShopMst? @relation(fields: [shopMstCode], references: [code])
 
   @@map("user_profiles")
 }
@@ -72,7 +72,7 @@ model UserSns {
   updatedAt DateTime @updatedAt @map("updated_at")
   x         String?
   facebook  String?
-  twitter   String?
+  instagram   String?
 
   user      User     @relation(fields: [userId], references: [id])
 
