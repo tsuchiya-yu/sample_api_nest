@@ -6,19 +6,21 @@ type UserProfile {
   introduction: String
   createdAt: String!
   updatedAt: String!
+  user: User
+  shopMst: ShopMst
 }
 
 input CreateUserProfileInput {
-  userId: Int!
-  shopMstCode: String
   catchphrase: String
   introduction: String
+  user: UserCreateNestedOneWithoutUserProfileInput!
+  shopMst: ShopMstCreateNestedOneWithoutUserProfilesInput
 }
 
 input UpdateUserProfileInput {
-  shopMstCode: String
   catchphrase: String
   introduction: String
+  shopMst: ShopMstUpdateOneWithoutUserProfilesInput
 }
 
 type Query {
@@ -29,4 +31,24 @@ type Query {
 type Mutation {
   createUserProfile(data: CreateUserProfileInput!): UserProfile!
   updateUserProfile(id: Int!, data: UpdateUserProfileInput!): UserProfile!
+}
+
+input UserCreateNestedOneWithoutUserProfileInput {
+  connect: UserWhereUniqueInput
+}
+
+input UserWhereUniqueInput {
+  email: String
+}
+
+input ShopMstCreateNestedOneWithoutUserProfilesInput {
+  connect: ShopMstWhereUniqueInput
+}
+
+input ShopMstWhereUniqueInput {
+  code: String
+}
+
+input ShopMstUpdateOneWithoutUserProfilesInput {
+  code: String
 }

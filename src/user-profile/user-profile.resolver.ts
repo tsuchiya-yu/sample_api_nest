@@ -21,7 +21,7 @@ export class UserProfileResolver {
     }
 
     @Mutation(() => UserProfile)
-    async createUserProfile(@Args('data') args: CreateOneUserProfileArgs): Promise<UserProfile> {
+    async createUserProfile(@Args() args: CreateOneUserProfileArgs): Promise<UserProfile> {
         return this.userProfileService.create(args);
     }
 

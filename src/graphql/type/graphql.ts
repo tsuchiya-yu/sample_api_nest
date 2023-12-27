@@ -41,6 +41,7 @@ export class ShopMstWhereInput {
 
 export class ShopMstWhereUniqueInput {
     id?: Nullable<number>;
+    code?: Nullable<string>;
 }
 
 export class ShopMstOrderByWithRelationInput {
@@ -155,16 +156,32 @@ export class NestedDateTimeFilter {
 }
 
 export class CreateUserProfileInput {
-    userId: number;
-    shopMstCode?: Nullable<string>;
     catchphrase?: Nullable<string>;
     introduction?: Nullable<string>;
+    user: UserCreateNestedOneWithoutUserProfileInput;
+    shopMst?: Nullable<ShopMstCreateNestedOneWithoutUserProfilesInput>;
 }
 
 export class UpdateUserProfileInput {
-    shopMstCode?: Nullable<string>;
     catchphrase?: Nullable<string>;
     introduction?: Nullable<string>;
+    shopMst?: Nullable<ShopMstUpdateOneWithoutUserProfilesInput>;
+}
+
+export class UserCreateNestedOneWithoutUserProfileInput {
+    connect?: Nullable<UserWhereUniqueInput>;
+}
+
+export class UserWhereUniqueInput {
+    email?: Nullable<string>;
+}
+
+export class ShopMstCreateNestedOneWithoutUserProfilesInput {
+    connect?: Nullable<ShopMstWhereUniqueInput>;
+}
+
+export class ShopMstUpdateOneWithoutUserProfilesInput {
+    code?: Nullable<string>;
 }
 
 export class CreateUserSnsInput {
@@ -243,6 +260,8 @@ export class UserProfile {
     introduction?: Nullable<string>;
     createdAt: string;
     updatedAt: string;
+    user?: Nullable<User>;
+    shopMst?: Nullable<ShopMst>;
 }
 
 export abstract class IMutation {
