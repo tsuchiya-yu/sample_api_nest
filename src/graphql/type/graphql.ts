@@ -184,8 +184,8 @@ export class ShopMstUpdateOneWithoutUserProfilesInput {
     code?: Nullable<string>;
 }
 
-export class CreateUserSnsInput {
-    userId: number;
+export class UserSnsCreateInput {
+    user: UserCreateNestedOneWithoutUserSnsInput;
     x?: Nullable<string>;
     facebook?: Nullable<string>;
     instagram?: Nullable<string>;
@@ -195,6 +195,10 @@ export class UpdateUserSnsInput {
     x?: Nullable<string>;
     facebook?: Nullable<string>;
     instagram?: Nullable<string>;
+}
+
+export class UserCreateNestedOneWithoutUserSnsInput {
+    connect?: Nullable<UserWhereUniqueInput>;
 }
 
 export class UserCreateInput {
@@ -269,7 +273,7 @@ export abstract class IMutation {
 
     abstract updateUserProfile(id: number, data: UpdateUserProfileInput): UserProfile | Promise<UserProfile>;
 
-    abstract createUserSns(data: CreateUserSnsInput): UserSns | Promise<UserSns>;
+    abstract createUserSns(data: UserSnsCreateInput): UserSns | Promise<UserSns>;
 
     abstract updateUserSns(id: number, data: UpdateUserSnsInput): UserSns | Promise<UserSns>;
 

@@ -8,8 +8,8 @@ type UserSns {
   instagram: String
 }
 
-input CreateUserSnsInput {
-  userId: Int!
+input UserSnsCreateInput {
+  user: UserCreateNestedOneWithoutUserSnsInput!
   x: String
   facebook: String
   instagram: String
@@ -27,6 +27,14 @@ type Query {
 }
 
 type Mutation {
-  createUserSns(data: CreateUserSnsInput!): UserSns!
+  createUserSns(data: UserSnsCreateInput!): UserSns!
   updateUserSns(id: Int!, data: UpdateUserSnsInput!): UserSns!
+}
+
+input UserCreateNestedOneWithoutUserSnsInput {
+  connect: UserWhereUniqueInput
+}
+
+input UserWhereUniqueInput {
+  email: String
 }

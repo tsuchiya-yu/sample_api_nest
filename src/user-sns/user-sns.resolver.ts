@@ -21,7 +21,7 @@ export class UserSnsResolver {
   }
 
   @Mutation(() => UserSns)
-  async createUserSns(@Args('data') args: CreateOneUserSnsArgs): Promise<UserSns> {
+  async createUserSns(@Args() args: CreateOneUserSnsArgs): Promise<UserSns> {
     return this.userSnsService.create(args);
   }
 
