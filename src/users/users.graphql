@@ -8,6 +8,8 @@ type User {
   isDeleted: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
+  userSns: UserSns
+  userProfile: UserProfile
 }
 
 input UserCreateInput {

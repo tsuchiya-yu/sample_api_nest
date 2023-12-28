@@ -302,6 +302,8 @@ export class User {
     isDeleted: boolean;
     createdAt: DateTime;
     updatedAt: DateTime;
+    userSns?: Nullable<UserSns>;
+    userProfile?: Nullable<UserProfile>;
 }
 
 export class CodeMeg {

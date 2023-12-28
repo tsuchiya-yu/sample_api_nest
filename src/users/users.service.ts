@@ -10,11 +10,17 @@ export class UsersService {
     constructor(private readonly prisma: PrismaService) { }
 
     async findFirst(args: FindFirstUserArgs): Promise<User | null> {
-        return this.prisma.user.findFirst(args);
+        return this.prisma.user.findFirst({
+            ...args,
+            include: { userSns: true, userProfile: true }
+        });
     }
 
     async findUnique(args: FindUniqueUserArgs): Promise<User | null> {
-        return this.prisma.user.findUnique(args);
+        return this.prisma.user.findUnique({
+            ...args,
+            include: { userSns: true, userProfile: true }
+        });
     }
 
     async createUser(args: CreateOneUserArgs): Promise<User> {
@@ -24,6 +30,7 @@ export class UsersService {
     async findUserByEmail(email: string): Promise<User> {
         const user = await this.prisma.user.findUnique({
             where: { email: email },
+            include: { userSns: true, userProfile: true } 
         });
 
         return user;
