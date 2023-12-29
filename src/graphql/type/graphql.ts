@@ -181,6 +181,10 @@ export class ShopMstCreateNestedOneWithoutUserProfilesInput {
 }
 
 export class ShopMstUpdateOneWithoutUserProfilesInput {
+    connect?: Nullable<ShopMstConnectInput>;
+}
+
+export class ShopMstConnectInput {
     code?: Nullable<string>;
 }
 

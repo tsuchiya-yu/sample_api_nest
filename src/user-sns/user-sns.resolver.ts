@@ -26,7 +26,7 @@ export class UserSnsResolver {
   }
 
   @Mutation(() => UserSns)
-  async updateUserSns(@Args('id') id: number, @Args('data') args: UpdateOneUserSnsArgs): Promise<UserSns> {
+  async updateUserSns(@Args('id') id: number, @Args() args: UpdateOneUserSnsArgs): Promise<UserSns> {
     return this.userSnsService.update({ where: { id }, data: args.data });
   }
 }

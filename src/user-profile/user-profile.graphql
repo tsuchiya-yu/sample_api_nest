@@ -50,5 +50,9 @@ input ShopMstWhereUniqueInput {
 }
 
 input ShopMstUpdateOneWithoutUserProfilesInput {
+  connect: ShopMstConnectInput
+}
+
+input ShopMstConnectInput {
   code: String
 }

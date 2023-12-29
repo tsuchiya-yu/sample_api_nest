@@ -26,7 +26,7 @@ export class UserProfileResolver {
     }
 
     @Mutation(() => UserProfile)
-    async updateUserProfile(@Args('id') id: number, @Args('data') args: UpdateOneUserProfileArgs): Promise<UserProfile> {
+    async updateUserProfile(@Args('id') id: number, @Args() args: UpdateOneUserProfileArgs): Promise<UserProfile> {
         return this.userProfileService.update({ where: { id }, data: args.data });
     }
 }
