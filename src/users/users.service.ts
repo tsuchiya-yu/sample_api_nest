@@ -4,6 +4,7 @@ import { User } from 'src/@generated/prisma-nestjs-graphql/user/user.model'
 import { FindFirstUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-first-user.args';
 import { CreateOneUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/create-one-user.args';
 import { FindUniqueUserArgs } from 'src/@generated/prisma-nestjs-graphql/user/find-unique-user.args';
+import { UserUpdateInput } from 'src/@generated/prisma-nestjs-graphql/user/user-update.input';
 
 @Injectable()
 export class UsersService {
@@ -35,4 +36,13 @@ export class UsersService {
 
         return user;
     }
+
+    async updateUser(id: number, userData: UserUpdateInput): Promise<User> {
+        return this.prisma.user.update({
+          where: { id },
+          data: {
+            name: userData.name
+          }
+        });
+      }
 }

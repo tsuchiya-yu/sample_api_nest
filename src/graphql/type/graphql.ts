@@ -219,6 +219,10 @@ export class SignInUserArgs {
     password: string;
 }
 
+export class UserUpdateInput {
+    name?: Nullable<string>;
+}
+
 export class ShopMst {
     id: number;
     code: string;
@@ -286,6 +290,8 @@ export abstract class IMutation {
     abstract signIn(data: SignInUserArgs): Token | Promise<Token>;
 
     abstract signOut(): CodeMeg | Promise<CodeMeg>;
+
+    abstract updateUser(id: number, data: UserUpdateInput): User | Promise<User>;
 }
 
 export class UserSns {

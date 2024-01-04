@@ -35,6 +35,10 @@ type Token {
   token: String!
 }
 
+input UserUpdateInput {
+  name: String
+}
+
 type Query {
   user(id: Int!): User
   dummyUser(id: Int!): User
@@ -46,4 +50,5 @@ type Mutation {
   createUser(data: UserCreateInput!): Token!
   signIn(data: SignInUserArgs!): Token!
   signOut: CodeMeg!
+  updateUser(id: Int!, data: UserUpdateInput!): User!
 }

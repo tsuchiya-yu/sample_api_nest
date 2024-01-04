@@ -9,6 +9,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
+import { UserUpdateInput } from 'src/@generated/prisma-nestjs-graphql/user/user-update.input';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -135,6 +136,11 @@ export class UsersResolver {
         } catch (error) {
             throw new HttpException('トークンの検証に失敗しました。', HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @Mutation(() => User)
+    async updateUser(@Args('id') id: number, @Args('data') updateUserData: UserUpdateInput): Promise<User> {
+      return this.userService.updateUser(id, updateUserData);
     }
 
 }
