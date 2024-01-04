@@ -138,9 +138,15 @@ export class UsersResolver {
         }
     }
 
+    // ユーザ情報の更新
     @Mutation(() => User)
     async updateUser(@Args('id') id: number, @Args('data') updateUserData: UserUpdateInput): Promise<User> {
       return this.userService.updateUser(id, updateUserData);
     }
 
+    // ユーザ情報の取得
+    @Query(() => User, { nullable: true })
+    async user(@Args('id') id: number): Promise<User | null> {
+      return this.userService.findUnique({ where: { id } });
+    }
 }
