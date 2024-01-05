@@ -10,6 +10,8 @@ import * as bcrypt from 'bcrypt';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserUpdateInput } from 'src/@generated/prisma-nestjs-graphql/user/user-update.input';
+import { GraphQLUpload } from 'graphql-upload-minimal';
+import type { FileUpload } from "graphql-upload/processRequest.mjs";
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -148,5 +150,10 @@ export class UsersResolver {
     @Query(() => User, { nullable: true })
     async user(@Args('id') id: number): Promise<User | null> {
       return this.userService.findUnique({ where: { id } });
+    }
+
+    @Mutation(() => Boolean)
+    async uploadUserImage(@Args('id') id: number, @Args({ name: 'file', type: () => GraphQLUpload })file: FileUpload, ): Promise<boolean> {
+      return this.userService.processUpload(id, file);
     }
 }

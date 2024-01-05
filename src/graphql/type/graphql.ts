@@ -292,6 +292,8 @@ export abstract class IMutation {
     abstract signOut(): CodeMeg | Promise<CodeMeg>;
 
     abstract updateUser(id: number, data: UserUpdateInput): User | Promise<User>;
+
+    abstract uploadUserImage(id: number, file: Upload): Nullable<boolean> | Promise<Nullable<boolean>>;
 }
 
 export class UserSns {
@@ -326,4 +328,5 @@ export class Token {
 }
 
 export type DateTime = any;
+export type Upload = any;
 type Nullable<T> = T | null;

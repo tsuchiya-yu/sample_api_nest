@@ -5,6 +5,7 @@ import { ServiceAccount } from 'firebase-admin';
 import { ConfigService } from '@nestjs/config';
 import { initializeApp } from 'firebase/app';
 import { FirebaseApp } from '@firebase/app';
+import { graphqlUploadExpress} from "graphql-upload-minimal";
 
 export let firebaseApp: FirebaseApp = undefined;
 
@@ -37,6 +38,9 @@ async function bootstrap() {
 
   // for CORS
   app.enableCors();
+
+  // for graphqlUploadExpress
+  app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
 
   await app.listen(3000);
 }
