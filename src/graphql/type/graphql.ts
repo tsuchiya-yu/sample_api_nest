@@ -316,6 +316,7 @@ export class User {
     updatedAt: DateTime;
     userSns?: Nullable<UserSns>;
     userProfile?: Nullable<UserProfile>;
+    userImageFile?: Nullable<string>;
 }
 
 export class CodeMeg {

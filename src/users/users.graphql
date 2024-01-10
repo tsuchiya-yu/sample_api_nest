@@ -11,6 +11,7 @@ type User {
   updatedAt: DateTime!
   userSns: UserSns
   userProfile: UserProfile
+  userImageFile: String
 }
 
 input UserCreateInput {

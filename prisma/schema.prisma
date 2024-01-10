@@ -20,6 +20,7 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
   email     String   @unique
   password  String
+  userImageFile String? @map("user_image_file")
 
   userProfile  UserProfile?
   userSns   UserSns?
