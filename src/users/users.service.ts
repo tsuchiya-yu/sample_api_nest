@@ -53,9 +53,8 @@ export class UsersService {
         const file = upload[0].file;
         const createReadStream = file.createReadStream;
         const readStreams = createReadStream(); 
-        const filename = file.filename;
+        const filename = file.filename.replace(/ /g, ''); // 半角スペースを除去する
 
-        
         try {
             // ファイルアップロード
             const key = await this.s3Service.uploadFile(readStreams, filename);

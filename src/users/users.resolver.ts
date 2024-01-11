@@ -11,8 +11,11 @@ import { AuthService } from 'src/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserUpdateInput } from 'src/@generated/prisma-nestjs-graphql/user/user-update.input';
 import { GraphQLUpload } from 'graphql-upload-minimal';
+import { UseInterceptors } from '@nestjs/common';
+import { UserInterceptor } from '../interceptors/userInterceptor';
 import type { FileUpload } from "graphql-upload/processRequest.mjs";
 
+@UseInterceptors(UserInterceptor)
 @Resolver(() => User)
 export class UsersResolver {
     constructor(
