@@ -155,6 +155,7 @@ export class UsersResolver {
       return this.userService.findUnique({ where: { id } });
     }
 
+    // プロフィール画像のアップロード
     @Mutation(() => Boolean)
     async uploadUserImage(@Args('id') id: number, @Args({ name: 'file', type: () => GraphQLUpload })file: FileUpload, ): Promise<boolean> {
       return this.userService.processUpload(id, file);
