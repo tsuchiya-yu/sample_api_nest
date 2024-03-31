@@ -1,0 +1,56 @@
+scalar DateTime
+
+type MenuMst {
+  id: Int!
+  code: String!
+  category: String!
+  name: String!
+  isDeleted: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  menuMsts(
+    where: MenuMstWhereInput, 
+    orderBy: [MenuMstOrderByWithRelationInput],
+    cursor: MenuMstWhereUniqueInput,
+    take: Int,
+    skip: Int,
+    distinct: [MenuMstScalarFieldEnum]
+  ): [MenuMst]
+}
+
+input MenuMstWhereInput {
+  id: IntFilter
+  code: StringFilter
+  category: StringFilter
+  name: StringFilter
+  isDeleted: BooleanFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input MenuMstWhereUniqueInput {
+  id: Int
+}
+
+input MenuMstOrderByWithRelationInput {
+  id: SortOrder
+  code: SortOrder
+  category: SortOrder
+  name: SortOrder
+  isDeleted: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+enum MenuMstScalarFieldEnum {
+  id
+  code
+  category
+  name
+  isDeleted
+  createdAt
+  updatedAt
+}

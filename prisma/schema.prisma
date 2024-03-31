@@ -79,3 +79,23 @@ model UserSns {
 
   @@map("user_sns")
 }
+
+enum MenuCategory {
+  MAIN // メインメニュー
+  SIDE // サイドメニュー
+  TOPPING // サイドメニュー
+  DRINK // 飲み物
+  OPTION // オプション
+}
+
+model MenuMst {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique // 外部参照キーとして用いる
+  isDeleted Boolean  @default(false) @map("is_deleted")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  category  MenuCategory 
+  name      String   // メニュー名
+
+  @@map("menu_mst")
+}

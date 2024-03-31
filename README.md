@@ -7,6 +7,7 @@
 ```sh
 docker compose exec nest-db bash
 mysql -h nest-db -u <ユーザ(環境変数)> -p<パスワード(環境変数)> DB名(環境変数)
+mysql -h nest-db -u user -ppassword develop
 ```
 
 ### graphqlのクエリ(サンプル)
