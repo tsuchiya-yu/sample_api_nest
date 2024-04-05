@@ -47,6 +47,7 @@ model ShopMst {
   updatedAt   DateTime @updatedAt @map("updated_at")
 
   userProfiles UserProfile[]
+  staffs StaffMst[] // この店舗に所属するスタッフのリスト
 
   @@map("shop_mst")
 }
@@ -83,7 +84,7 @@ model UserSns {
 enum MenuCategory {
   MAIN // メインメニュー
   SIDE // サイドメニュー
-  TOPPING // サイドメニュー
+  TOPPING // トッピング
   DRINK // 飲み物
   OPTION // オプション
 }
