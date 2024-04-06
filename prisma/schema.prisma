@@ -100,3 +100,16 @@ model MenuMst {
 
   @@map("menu_mst")
 }
+
+model StaffMst {
+  id          Int      @id @default(autoincrement())
+  isDeleted   Boolean  @default(false) @map("is_deleted")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  name        String   // スタッフ名
+  name_kana   String   // スタッフ名カナ
+  shopMstCode String?  @map("shop_mst_code") // 所属店舗
+  shopMst     ShopMst? @relation(fields: [shopMstCode], references: [code]) // 所属店舗リレーション
+
+  @@map("staff_mst")
+}

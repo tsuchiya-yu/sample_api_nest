@@ -10,6 +10,7 @@ import { ShopMstModule } from './shop-mst/shop-mst.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { UserSnsModule } from './user-sns/user-sns.module';
 import { MenuMstModule } from './menu-mst/menu-mst.module';
+import { StaffMstModule } from './staff-mst/staff-mst.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { MenuMstModule } from './menu-mst/menu-mst.module';
     UserProfileModule,
     UserSnsModule,
     MenuMstModule,
+    StaffMstModule,
   ],
 })
 export class AppModule { }

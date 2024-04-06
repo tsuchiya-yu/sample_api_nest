@@ -1,0 +1,147 @@
+scalar DateTime
+
+type StaffMst {
+  id: Int!
+  name: String!
+  name_kana: String!
+  shopMstCode: String
+  shopMst: ShopMst
+  isDeleted: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  staffMsts(
+    where: StaffMstWhereInput, 
+    orderBy: [StaffMstOrderByWithRelationInput],
+    cursor: StaffMstWhereUniqueInput,
+    take: Int,
+    skip: Int,
+    distinct: [StaffMstScalarFieldEnum]
+  ): [StaffMst]
+}
+
+input StaffMstWhereInput {
+  id: IntFilter
+  name: StringFilter
+  name_kana: StringFilter
+  shopMstCode: StringFilter
+  isDeleted: BooleanFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  AND: [StaffMstWhereInput!]
+  OR: [StaffMstWhereInput!]
+  NOT: [StaffMstWhereInput!]
+}
+
+input StaffMstOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  name_kana: SortOrder
+  shopMstCode: SortOrder
+  isDeleted: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input StaffMstWhereUniqueInput {
+  id: Int
+}
+
+enum StaffMstScalarFieldEnum {
+  id
+  name
+  name_kana
+  shopMstCode
+  isDeleted
+  createdAt
+  updatedAt
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: NestedBooleanFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int]
+  notIn: [Int]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String]
+  notIn: [String]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedBooleanFilter {
+  equals: Boolean
+  not: NestedBooleanFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime]
+  notIn: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}

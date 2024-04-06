@@ -40,6 +40,16 @@ export enum SiteUpdatesScalarFieldEnum {
     updatedAt = "updatedAt"
 }
 
+export enum StaffMstScalarFieldEnum {
+    id = "id",
+    name = "name",
+    name_kana = "name_kana",
+    shopMstCode = "shopMstCode",
+    isDeleted = "isDeleted",
+    createdAt = "createdAt",
+    updatedAt = "updatedAt"
+}
+
 export class MenuMstWhereInput {
     id?: Nullable<IntFilter>;
     code?: Nullable<StringFilter>;
@@ -189,6 +199,33 @@ export class NestedDateTimeFilter {
     not?: Nullable<NestedDateTimeFilter>;
 }
 
+export class StaffMstWhereInput {
+    id?: Nullable<IntFilter>;
+    name?: Nullable<StringFilter>;
+    name_kana?: Nullable<StringFilter>;
+    shopMstCode?: Nullable<StringFilter>;
+    isDeleted?: Nullable<BooleanFilter>;
+    createdAt?: Nullable<DateTimeFilter>;
+    updatedAt?: Nullable<DateTimeFilter>;
+    AND?: Nullable<StaffMstWhereInput[]>;
+    OR?: Nullable<StaffMstWhereInput[]>;
+    NOT?: Nullable<StaffMstWhereInput[]>;
+}
+
+export class StaffMstOrderByWithRelationInput {
+    id?: Nullable<SortOrder>;
+    name?: Nullable<SortOrder>;
+    name_kana?: Nullable<SortOrder>;
+    shopMstCode?: Nullable<SortOrder>;
+    isDeleted?: Nullable<SortOrder>;
+    createdAt?: Nullable<SortOrder>;
+    updatedAt?: Nullable<SortOrder>;
+}
+
+export class StaffMstWhereUniqueInput {
+    id?: Nullable<number>;
+}
+
 export class CreateUserProfileInput {
     catchphrase?: Nullable<string>;
     introduction?: Nullable<string>;
@@ -276,6 +313,8 @@ export abstract class IQuery {
 
     abstract siteUpdate(id: number): Nullable<SiteUpdates> | Promise<Nullable<SiteUpdates>>;
 
+    abstract staffMsts(where?: Nullable<StaffMstWhereInput>, orderBy?: Nullable<Nullable<StaffMstOrderByWithRelationInput>[]>, cursor?: Nullable<StaffMstWhereUniqueInput>, take?: Nullable<number>, skip?: Nullable<number>, distinct?: Nullable<Nullable<StaffMstScalarFieldEnum>[]>): Nullable<Nullable<StaffMst>[]> | Promise<Nullable<Nullable<StaffMst>[]>>;
+
     abstract userProfile(id: number): Nullable<UserProfile> | Promise<Nullable<UserProfile>>;
 
     abstract userProfiles(): Nullable<UserProfile[]> | Promise<Nullable<UserProfile[]>>;
@@ -307,6 +346,17 @@ export class SiteUpdates {
     title: string;
     content: string;
     publishedAt: DateTime;
+    updatedAt: DateTime;
+}
+
+export class StaffMst {
+    id: number;
+    name: string;
+    name_kana: string;
+    shopMstCode?: Nullable<string>;
+    shopMst?: Nullable<ShopMst>;
+    isDeleted: boolean;
+    createdAt: DateTime;
     updatedAt: DateTime;
 }
 
